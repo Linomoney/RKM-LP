@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PT. Rapik Karya Mandiri — Parking, Security, Cleaning &amp; Construction</title>
+<meta name="description" content="PT. Rapik Karya Mandiri — mitra terpercaya pengelolaan parkir, keamanan, kebersihan, dan konstruksi sejak 2010.">
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --dark:#0f3d27;
+    --dark-2:#0a2c1c;
+    --green:#1f8b4c;
+    --lime:#8bc53f;
+    --lime-soft:#c7e89a;
+    --paper:#f7faf4;
+    --paper-2:#eef3e6;
+    --ink:#16241c;
+    --steel:#5c6e62;
+    --line:#dde6d4;
+  }
+  *{box-sizing:border-box; scroll-behavior:smooth;}
+  body{ background:var(--paper); color:var(--ink); font-family:'Inter',sans-serif; overflow-x:hidden; }
+  .font-display{ font-family:'Poppins',sans-serif; }
+  ::selection{ background:var(--lime); color:var(--dark-2); }
+  ::-webkit-scrollbar{ width:6px; }
+  ::-webkit-scrollbar-track{ background:var(--paper); }
+  ::-webkit-scrollbar-thumb{ background:var(--green); }
+
+  .page{ display:none; }
+  .page.active{ display:block; }
+
+  .eyebrow{ font-size:11px; letter-spacing:.22em; text-transform:uppercase; font-weight:600; }
+
+  .grad-green{ background: linear-gradient(135deg, var(--dark) 0%, var(--green) 100%); }
+
+  .btn-lime{
+    background:var(--lime); color:var(--dark-2);
+    transition: background .3s ease, transform .3s ease;
+  }
+  .btn-lime:hover{ background:var(--lime-soft); transform: translateY(-2px); }
+
+  .btn-outline-light{
+    border:1.5px solid rgba(255,255,255,0.45); color:#fff;
+    transition: border-color .3s ease, background .3s ease;
+  }
+  .btn-outline-light:hover{ border-color:var(--lime); background:rgba(139,197,63,0.12); }
+
+  .nav-bar{ backdrop-filter: blur(14px); background: rgba(15,61,39,0.85); }
+
+  .nav-link{ position:relative; }
+  .nav-link::after{
+    content:''; position:absolute; left:0; bottom:-4px; width:0; height:2px; background:var(--lime);
+    transition: width .3s ease;
+  }
+  .nav-link.active::after, .nav-link:hover::after{ width:100%; }
+  .nav-link.active{ color:#fff; }
+
+  .logo-mark{
+    width:38px; height:38px; position:relative;
+  }
+
+  .card{
+    background:#fff; border:1px solid var(--line);
+    transition: transform .35s ease, box-shadow .35s ease, border-color .35s ease;
+  }
+  .card:hover{ transform: translateY(-5px); box-shadow:0 20px 40px -22px rgba(15,61,39,0.3); border-color:var(--green); }
+
+  .stat-num{ font-family:'Poppins',sans-serif; font-weight:700; }
+
+  .timeline-item{ position:relative; padding-left:28px; }
+  .timeline-item::before{
+    content:''; position:absolute; left:0; top:4px; width:10px; height:10px; border-radius:50%; background:var(--lime);
+  }
+  .timeline-item::after{
+    content:''; position:absolute; left:4px; top:14px; bottom:-32px; width:2px; background:var(--line);
+  }
+  .timeline-item:last-child::after{ display:none; }
+
+  .gallery-placeholder{
+    aspect-ratio: 4/3; background: linear-gradient(135deg, var(--paper-2), var(--line));
+    display:flex; align-items:center; justify-content:center; position:relative; overflow:hidden;
+  }
+  .gallery-placeholder svg{ opacity:0.35; }
+
+  #heroVideo{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+
+  .underline-link{
+    background-image: linear-gradient(var(--lime),var(--lime));
+    background-position:0 100%; background-repeat:no-repeat; background-size:0% 1.5px;
+    transition: background-size .35s ease;
+  }
+  .underline-link:hover{ background-size:100% 1.5px; }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation-duration:0.001ms !important; transition-duration:0.001ms !important; }
+  }
+</style>
+</head>
+<body class="antialiased">
+
+<!-- ============ NAVBAR ============ -->
+<header class="fixed top-0 left-0 w-full z-50">
+  <nav class="nav-bar w-full px-3 sm:px-8 py-2.5 sm:py-3.5 flex items-center justify-between border-b border-white/10 gap-2">
+    <a href="#home" data-link data-page="home" class="flex items-center gap-2 sm:gap-3 min-w-0">
+      <span class="bg-white rounded-lg sm:rounded-xl p-1 sm:p-1.5 flex items-center justify-center shrink-0 shadow-sm">
+        <img src="https://res.cloudinary.com/ddh5nkwv7/image/upload/v1782804504/logo_pt_dab2ch.png" alt="Logo PT. Rapik Karya Mandiri" class="h-8 sm:h-10 w-auto object-contain">
+      </span>
+      <span class="hidden sm:inline-block font-display font-700 text-base sm:text-lg text-white leading-tight whitespace-nowrap">RAPIK <span class="text-[var(--lime)]">KARYA</span><br class="hidden sm:block"><span class="hidden sm:inline text-xs font-normal tracking-[0.2em] text-white/60">MANDIRI</span></span>
+    </a>
+    <div class="hidden md:flex items-center gap-7 text-sm text-white/75">
+      <a href="#home" data-link data-page="home" class="nav-link pb-1">Beranda</a>
+      <a href="#tentang" data-link data-page="tentang" class="nav-link pb-1">Tentang Kami</a>
+      <a href="#layanan" data-link data-page="layanan" class="nav-link pb-1">Layanan</a>
+      <a href="#galeri" data-link data-page="galeri" class="nav-link pb-1">Dokumentasi</a>
+      <a href="#kontak" data-link data-page="kontak" class="nav-link pb-1">Kontak</a>
+    </div>
+    <a href="#kontak" data-link data-page="kontak" class="btn-lime hidden md:inline-flex px-5 py-2.5 text-xs font-semibold tracking-wide font-display shrink-0">HUBUNGI KAMI</a>
+    <button id="menuBtn" class="md:hidden w-9 h-9 shrink-0 flex flex-col items-center justify-center gap-[5px] relative" aria-label="Buka menu" aria-expanded="false">
+      <span class="menu-bar w-5 h-[1.5px] bg-white block transition-all duration-300"></span>
+      <span class="menu-bar w-5 h-[1.5px] bg-white block transition-all duration-300"></span>
+      <span class="menu-bar w-5 h-[1.5px] bg-white block transition-all duration-300"></span>
+    </button>
+  </nav>
+  <div id="mobileMenu" class="md:hidden absolute top-full left-0 w-full bg-[var(--dark-2)] border-b border-white/10 shadow-xl flex flex-col text-white/90 text-sm max-h-[calc(100vh-56px)] overflow-y-auto opacity-0 -translate-y-2 pointer-events-none transition-all duration-250 ease-out">
+    <a href="#home" data-link data-page="home" class="px-6 py-3.5 border-b border-white/5">Beranda</a>
+    <a href="#tentang" data-link data-page="tentang" class="px-6 py-3.5 border-b border-white/5">Tentang Kami</a>
+    <a href="#layanan" data-link data-page="layanan" class="px-6 py-3.5 border-b border-white/5">Layanan</a>
+    <a href="#galeri" data-link data-page="galeri" class="px-6 py-3.5 border-b border-white/5">Dokumentasi</a>
+    <a href="#kontak" data-link data-page="kontak" class="px-6 py-3.5 border-b border-white/5">Kontak</a>
+    <a href="#kontak" data-link data-page="kontak" class="btn-lime text-center mx-6 my-4 px-5 py-3 text-xs font-semibold font-display">HUBUNGI KAMI</a>
+  </div>
+</header>
+
+<!-- ====================================================== -->
+<!-- PAGE: HOME -->
+<!-- ====================================================== -->
+<section id="page-home" class="page active">
+
+  <!-- HERO with video -->
+  <div class="relative w-full h-[100svh] min-h-[560px] flex items-end overflow-hidden">
+    <video id="heroVideo" autoplay muted loop playsinline poster="">
+      <source src="https://res.cloudinary.com/ddh5nkwv7/video/upload/v1782638338/sample_ztpd9h.mp4" type="video/mp4">
+    </video>
+    <div class="absolute inset-0 bg-gradient-to-t from-[var(--dark-2)] via-[var(--dark-2)]/60 to-[var(--dark-2)]/30"></div>
+    <div class="absolute inset-0 bg-[var(--dark-2)]/20"></div>
+
+    <div class="relative z-10 w-full max-w-6xl mx-auto px-5 sm:px-8 pb-16 sm:pb-20">
+      <p class="eyebrow text-[var(--lime)] mb-4 hero-fade opacity-0">Sejak 2010 — Depok, Jawa Barat</p>
+      <h1 class="font-display font-800 leading-[1.05] text-[10vw] sm:text-6xl md:text-7xl text-white max-w-3xl hero-fade opacity-0">
+        Mengelola Kawasan, <span class="text-[var(--lime)]">Membangun Kepercayaan.</span>
+      </h1>
+      <p class="mt-6 max-w-xl text-sm sm:text-base text-white/75 leading-relaxed hero-fade opacity-0">
+        PT. Rapik Karya Mandiri menyediakan solusi terintegrasi pengelolaan parkir, keamanan, kebersihan, dan jasa konstruksi untuk mitra swasta maupun pemerintah di seluruh Indonesia.
+      </p>
+      <div class="mt-8 flex flex-wrap items-center gap-4 hero-fade opacity-0">
+        <a href="#layanan" data-link data-page="layanan" class="btn-lime inline-flex items-center px-7 py-3.5 text-sm font-semibold tracking-wide font-display">LIHAT LAYANAN KAMI</a>
+        <a href="#tentang" data-link data-page="tentang" class="btn-outline-light inline-flex items-center px-7 py-3.5 text-sm tracking-wide">Profil Perusahaan →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- STAT STRIP -->
+  <div class="grad-green">
+    <div class="max-w-6xl mx-auto px-5 sm:px-8 py-12 grid grid-cols-2 sm:grid-cols-4 gap-6 sm:gap-8">
+      <div class="text-center sm:text-left">
+        <div class="stat-num text-3xl sm:text-4xl text-white">2010</div>
+        <p class="text-xs text-white/65 mt-1.5 uppercase tracking-wide">Tahun Berdiri</p>
+      </div>
+      <div class="text-center sm:text-left">
+        <div class="stat-num text-3xl sm:text-4xl text-white">14<span class="text-lg">th</span></div>
+        <p class="text-xs text-white/65 mt-1.5 uppercase tracking-wide">Tahun Beroperasi</p>
+      </div>
+      <div class="text-center sm:text-left">
+        <div class="stat-num text-3xl sm:text-4xl text-white">200+</div>
+        <p class="text-xs text-white/65 mt-1.5 uppercase tracking-wide">Tenaga Profesional</p>
+      </div>
+      <div class="text-center sm:text-left">
+        <div class="stat-num text-3xl sm:text-4xl text-white">4</div>
+        <p class="text-xs text-white/65 mt-1.5 uppercase tracking-wide">Lini Layanan</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- INTRO SPLIT -->
+  <div class="max-w-6xl mx-auto px-5 sm:px-8 py-20 sm:py-28 grid md:grid-cols-12 gap-10">
+    <div class="md:col-span-4">
+      <p class="eyebrow text-[var(--green)] mb-3">Siapa Kami</p>
+      <h2 class="font-display font-700 text-3xl sm:text-4xl leading-tight">Berakar dari Parkir &amp; Keamanan, Tumbuh ke Konstruksi.</h2>
+    </div>
+    <div class="md:col-span-7 md:col-start-6 text-[var(--steel)] text-sm sm:text-base leading-relaxed space-y-5">
+      <p>Berdiri sejak 2010 di Kota Depok, PT. Rapik Karya Mandiri mengawali bisnis di bidang pengelolaan sistem perparkiran dan penyediaan jasa keamanan (security service), sebelum memperluas lini usaha ke jasa konstruksi pada 2019.</p>
+      <p>Kini, dengan lebih dari 200 tenaga profesional, kami melayani gedung perparkiran, pasar tradisional, kawasan komersial, hingga proyek pembangunan infrastruktur — selalu berlandaskan integritas dan profesionalisme.</p>
+      <a href="#tentang" data-link data-page="tentang" class="underline-link inline-flex items-center gap-2 text-[var(--ink)] font-medium pb-0.5">Baca selengkapnya tentang kami →</a>
+    </div>
+  </div>
+
+  <!-- SERVICES PREVIEW -->
+  <div class="bg-[var(--paper-2)] border-y border-[var(--line)]">
+    <div class="max-w-6xl mx-auto px-5 sm:px-8 py-20 sm:py-28">
+      <p class="eyebrow text-[var(--green)] mb-3">Layanan Kami</p>
+      <h2 class="font-display font-700 text-3xl sm:text-4xl leading-tight mb-12 max-w-lg">Empat Lini Layanan Terintegrasi</h2>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        <div class="card p-6">
+          <div class="w-11 h-11 rounded-full bg-[var(--dark)] flex items-center justify-center mb-6 text-[var(--lime)]">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="4" width="18" height="16" rx="1"/><path d="M8 4v16M3 9h5M8 14h6a2 2 0 1 0 0-4H8"/></svg>
+          </div>
+          <h3 class="font-display font-600 text-base mb-2">RKM Parking</h3>
+          <p class="text-xs text-[var(--steel)] leading-relaxed">Pengelolaan parkir on-street &amp; off-street dengan sistem kontrol digital.</p>
+        </div>
+        <div class="card p-6">
+          <div class="w-11 h-11 rounded-full bg-[var(--dark)] flex items-center justify-center mb-6 text-[var(--lime)]">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3z"/></svg>
+          </div>
+          <h3 class="font-display font-600 text-base mb-2">RKM Security</h3>
+          <p class="text-xs text-[var(--steel)] leading-relaxed">Tenaga keamanan terlatih untuk kawasan korporat dan publik.</p>
+        </div>
+        <div class="card p-6">
+          <div class="w-11 h-11 rounded-full bg-[var(--dark)] flex items-center justify-center mb-6 text-[var(--lime)]">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 19h14M7 19V9l5-4 5 4v10M10 19v-5h4v5"/></svg>
+          </div>
+          <h3 class="font-display font-600 text-base mb-2">RKM MCK</h3>
+          <p class="text-xs text-[var(--steel)] leading-relaxed">Layanan kebersihan menyeluruh untuk gedung dan fasilitas publik.</p>
+        </div>
+        <div class="card p-6">
+          <div class="w-11 h-11 rounded-full bg-[var(--dark)] flex items-center justify-center mb-6 text-[var(--lime)]">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-6h6v6"/></svg>
+          </div>
+          <h3 class="font-display font-600 text-base mb-2">RKM Konstruksi</h3>
+          <p class="text-xs text-[var(--steel)] leading-relaxed">Pembangunan gedung, pasar, perumahan, jalan, hingga jembatan.</p>
+        </div>
+      </div>
+      <a href="#layanan" data-link data-page="layanan" class="underline-link inline-flex items-center gap-2 text-[var(--ink)] font-medium pb-0.5 mt-10">Lihat detail semua layanan →</a>
+    </div>
+  </div>
+
+  <!-- DOCUMENTATION PREVIEW -->
+  <div class="max-w-6xl mx-auto px-5 sm:px-8 py-20 sm:py-24">
+    <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
+      <div>
+        <p class="eyebrow text-[var(--green)] mb-3">Sekilas Dokumentasi</p>
+        <h2 class="font-display font-700 text-3xl sm:text-4xl leading-tight">Momen Kegiatan RKM</h2>
+      </div>
+      <a href="#galeri" data-link data-page="galeri" class="underline-link inline-flex items-center gap-2 text-[var(--ink)] font-medium pb-0.5 shrink-0">Lihat semua dokumentasi →</a>
+    </div>
+    <div class="grid sm:grid-cols-3 gap-5">
+      <figure class="gallery-placeholder">
+        <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#1f8b4c" stroke-width="1.4"><path d="M21 19V5a2 2 0 00-2-2H5a2 2 0 00-2 2v14m18 0H3m18 0l-6-7-4 5-2-3-6 5"/></svg>
+      </figure>
+      <figure class="gallery-placeholder">
+        <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#1f8b4c" stroke-width="1.4"><path d="M21 19V5a2 2 0 00-2-2H5a2 2 0 00-2 2v14m18 0H3m18 0l-6-7-4 5-2-3-6 5"/></svg>
+      </figure>
+      <figure class="gallery-placeholder">
+        <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#1f8b4c" stroke-width="1.4"><path d="M21 19V5a2 2 0 00-2-2H5a2 2 0 00-2 2v14m18 0H3m18 0l-6-7-4 5-2-3-6 5"/></svg>
+      </figure>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="grad-green">
+    <div class="max-w-6xl mx-auto px-5 sm:px-8 py-20 text-center">
+      <h2 class="font-display font-800 text-3xl sm:text-5xl text-white leading-tight mb-6">Siap Bekerja Sama dengan Kami?</h2>
+      <p class="text-white/70 max-w-md mx-auto mb-9 text-sm sm:text-base">Diskusikan kebutuhan pengelolaan kawasan atau proyek konstruksi Anda bersama tim kami.</p>
+      <a href="#kontak" data-link data-page="kontak" class="btn-lime inline-flex items-center px-8 py-4 text-sm font-semibold tracking-wide font-display">HUBUNGI KAMI SEKARANG</a>
+    </div>
+  </div>
+</section>
+
+<!-- ====================================================== -->
+<!-- PAGE: TENTANG -->
+<!-- ====================================================== -->
+<section id="page-tentang" class="page">
+  <div class="grad-green pt-32 sm:pt-40 pb-16 sm:pb-20">
+    <div class="max-w-6xl mx-auto px-5 sm:px-8">
+      <p class="eyebrow text-[var(--lime)] mb-3">Profil Perusahaan</p>
+      <h1 class="font-display font-800 text-white text-4xl sm:text-5xl leading-tight max-w-2xl">Tentang PT. Rapik Karya Mandiri</h1>
+    </div>
+  </div>
+
+  <div class="max-w-6xl mx-auto px-5 sm:px-8 py-16 sm:py-24 grid md:grid-cols-12 gap-12">
+    <div class="md:col-span-7 space-y-6 text-sm sm:text-base text-[var(--steel)] leading-relaxed">
+      <p>PT. Rapik Karya Mandiri (RKM) adalah perusahaan nasional yang berdiri sejak tahun 2010 di Kota Depok, Jawa Barat. Perusahaan ini mengawali langkahnya dalam bisnis pengelolaan sistem perparkiran serta penyediaan jasa keamanan (security service) bagi berbagai instansi swasta maupun pemerintah.</p>
+      <p>Pada tahun 2019, RKM memperluas lini bisnisnya ke bidang pengadaan jasa konstruksi, mencakup pembangunan gedung perparkiran bersusun (double decker), gedung pasar dan pergudangan, gedung bertingkat, perumahan dan real estate, jalan raya, irigasi, serta jembatan.</p>
+      <p>Memasuki usia ke-14 tahun beroperasi, RKM telah mengelola dan mendampingi pengelolaan kawasan parkir di sejumlah pasar tradisional dan fasilitas publik, sembari terus mengembangkan kapasitas tenaga kerja profesional dan penerapan teknologi pada setiap lini layanan.</p>
+      <blockquote class="font-display text-lg sm:text-xl text-[var(--ink)] italic border-l-2 border-[var(--green)] pl-5 my-8">
+        "Ready to provide safe, comfortable, and best services for the community."
+      </blockquote>
+
+      <div class="grid sm:grid-cols-2 gap-6 mt-10">
+        <div class="bg-[var(--paper-2)] border border-[var(--line)] p-6">
+          <h3 class="font-display font-600 text-base text-[var(--ink)] mb-2.5">Visi</h3>
+          <p class="text-sm leading-relaxed">Menjadi mitra yang handal dan terpercaya dalam pekerjaan konstruksi dan pengelolaan kawasan, dengan senantiasa mengedepankan kualitas, inovasi, dan teknologi terkini.</p>
+        </div>
+        <div class="bg-[var(--paper-2)] border border-[var(--line)] p-6">
+          <h3 class="font-display font-600 text-base text-[var(--ink)] mb-2.5">Misi</h3>
+          <p class="text-sm leading-relaxed">Memberikan pelayanan berkualitas kepada pelanggan dengan bertumpu pada Integritas, Ketertiban, Pengembangan, Nilai Ekonomis, dan Profesionalisme.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="md:col-span-4 md:col-start-9">
+      <div class="bg-[var(--dark)] text-white p-7 sticky top-28">
+        <p class="eyebrow text-[var(--lime)] mb-5">Manajemen</p>
+        <div class="mb-6">
+          <p class="font-display font-600 text-lg">Irfan Januar</p>
+          <p class="text-xs text-white/60 mt-1 uppercase tracking-wide">Direktur Utama</p>
+        </div>
+        <div class="h-px bg-white/15 mb-6"></div>
+        <p class="text-xs text-white/55 leading-relaxed">Struktur legal perusahaan didampingi oleh notaris terdaftar sesuai akta pendirian dan perubahan badan usaha.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- TIMELINE -->
+  <div class="bg-[var(--paper-2)] border-y border-[var(--line)]">
+    <div class="max-w-6xl mx-auto px-5 sm:px-8 py-20 sm:py-24">
+      <p class="eyebrow text-[var(--green)] mb-3">Perjalanan Kami</p>
+      <h2 class="font-display font-700 text-3xl sm:text-4xl leading-tight mb-14">Jejak Langkah RKM</h2>
+      <div class="space-y-10 max-w-xl">
+        <div class="timeline-item">
+          <p class="font-display font-700 text-[var(--green)] text-sm mb-1">2010</p>
+          <h3 class="font-display font-600 text-base mb-1.5">Pendirian Perusahaan</h3>
+          <p class="text-sm text-[var(--steel)] leading-relaxed">RKM berdiri di Depok, mengawali bisnis di bidang pengelolaan parkir dan jasa keamanan.</p>
+        </div>
+        <div class="timeline-item">
+          <p class="font-display font-700 text-[var(--green)] text-sm mb-1">2019</p>
+          <h3 class="font-display font-600 text-base mb-1.5">Ekspansi ke Konstruksi</h3>
+          <p class="text-sm text-[var(--steel)] leading-relaxed">RKM membentangkan sayap ke bidang pengadaan jasa konstruksi untuk berbagai jenis bangunan dan infrastruktur.</p>
+        </div>
+        <div class="timeline-item">
+          <p class="font-display font-700 text-[var(--green)] text-sm mb-1">2024</p>
+          <h3 class="font-display font-600 text-base mb-1.5">14 Tahun Berkarya</h3>
+          <p class="text-sm text-[var(--steel)] leading-relaxed">Merayakan 14 tahun perjalanan dengan semangat "Membangun Masa Depan, Mengejar 14 Tahun Berkarya".</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- AFILIASI -->
+  <div class="max-w-6xl mx-auto px-5 sm:px-8 py-20 sm:py-24">
+    <p class="eyebrow text-[var(--green)] mb-3">Afiliasi &amp; Mitra Kerja</p>
+    <h2 class="font-display font-700 text-3xl sm:text-4xl leading-tight mb-10 max-w-xl">Bekerja Sama dengan Instansi Terpercaya</h2>
+    <div class="grid sm:grid-cols-2 gap-6">
+      <div class="card p-7">
+        <h3 class="font-display font-600 text-base mb-2.5">Pengelolaan Pasar Tradisional</h3>
+        <p class="text-sm text-[var(--steel)] leading-relaxed">RKM berperan dalam pengelolaan kawasan parkir di sejumlah pasar tradisional, bermitra dengan pengelola pasar seperti PD Pasar Jaya di wilayah operasionalnya.</p>
+      </div>
+      <div class="card p-7">
+        <h3 class="font-display font-600 text-base mb-2.5">Instansi Swasta &amp; Pemerintah</h3>
+        <p class="text-sm text-[var(--steel)] leading-relaxed">Perusahaan menjalin kerja sama dengan berbagai perusahaan nasional maupun instansi pemerintah dalam pekerjaan jasa konstruksi dan pengadaan barang/jasa.</p>
+      </div>
+    </div>
+    <p class="text-xs text-[var(--steel)]/70 mt-6 italic">*Daftar mitra lengkap dapat dilengkapi sesuai data resmi perusahaan.</p>
+  </div>
+</section>
+
+<!-- ====================================================== -->
+<!-- PAGE: LAYANAN -->
+<!-- ====================================================== -->
+<section id="page-layanan" class="page">
+  <div class="grad-green pt-32 sm:pt-40 pb-16 sm:pb-20">
+    <div class="max-w-6xl mx-auto px-5 sm:px-8">
+      <p class="eyebrow text-[var(--lime)] mb-3">Lini Bisnis</p>
+      <h1 class="font-display font-800 text-white text-4xl sm:text-5xl leading-tight max-w-2xl">Layanan Kami</h1>
+      <p class="text-white/70 mt-5 max-w-xl text-sm sm:text-base">Solusi terintegrasi untuk pengelolaan kawasan dan pembangunan infrastruktur, dirancang sesuai kebutuhan klien.</p>
+    </div>
+  </div>
+
+  <div class="max-w-6xl mx-auto px-5 sm:px-8 py-16 sm:py-24 space-y-16">
+
+    <div class="grid md:grid-cols-12 gap-8 items-start border-t border-[var(--line)] pt-12">
+      <div class="md:col-span-4">
+        <span class="font-display text-xs text-[var(--green)] tracking-widest">01 / PARKING</span>
+        <h2 class="font-display font-700 text-2xl sm:text-3xl mt-3">RKM Parking</h2>
+      </div>
+      <div class="md:col-span-7 md:col-start-6 text-sm sm:text-base text-[var(--steel)] leading-relaxed space-y-3">
+        <p>Melayani penyediaan software dan pengelolaan jasa di bidang parkir, baik on-street maupun off-street, sesuai standar sertifikasi yang berlaku.</p>
+        <p>Sistem dilengkapi pengambilan dan kontrol gambar cerdas (CCTV terintegrasi) untuk pengawasan kendaraan, serta skema parkir berasuransi yang memberi rasa aman bagi pengguna.</p>
+      </div>
+    </div>
+
+    <div class="grid md:grid-cols-12 gap-8 items-start border-t border-[var(--line)] pt-12">
+      <div class="md:col-span-4">
+        <span class="font-display text-xs text-[var(--green)] tracking-widest">02 / SECURITY</span>
+        <h2 class="font-display font-700 text-2xl sm:text-3xl mt-3">RKM Security</h2>
+      </div>
+      <div class="md:col-span-7 md:col-start-6 text-sm sm:text-base text-[var(--steel)] leading-relaxed space-y-3">
+        <p>Penyediaan tenaga keamanan terlatih bagi lingkungan korporat, pemerintah, kawasan komersial, dan fasilitas publik.</p>
+        <p>Layanan mencakup security consultant &amp; investigation, dengan personel yang dibekali pelatihan rutin untuk menjaga standar profesionalisme dan kesiapsiagaan di lapangan.</p>
+      </div>
+    </div>
+
+    <div class="grid md:grid-cols-12 gap-8 items-start border-t border-[var(--line)] pt-12">
+      <div class="md:col-span-4">
+        <span class="font-display text-xs text-[var(--green)] tracking-widest">03 / CLEANING</span>
+        <h2 class="font-display font-700 text-2xl sm:text-3xl mt-3">RKM MCK</h2>
+      </div>
+      <div class="md:col-span-7 md:col-start-6 text-sm sm:text-base text-[var(--steel)] leading-relaxed space-y-3">
+        <p>Layanan kebersihan menyeluruh untuk gedung perkantoran, fasilitas umum, dan kawasan komersial, termasuk kegiatan kebersihan rutin seperti program "Jumat Bersih" di area kerja RKM.</p>
+        <p>Tim kebersihan bekerja terjadwal untuk menjaga kenyamanan dan kesehatan lingkungan secara berkelanjutan.</p>
+      </div>
+    </div>
+
+    <div class="grid md:grid-cols-12 gap-8 items-start border-t border-[var(--line)] pt-12">
+      <div class="md:col-span-4">
+        <span class="font-display text-xs text-[var(--green)] tracking-widest">04 / KONSTRUKSI</span>
+        <h2 class="font-display font-700 text-2xl sm:text-3xl mt-3">RKM Konstruksi</h2>
+      </div>
+      <div class="md:col-span-7 md:col-start-6 text-sm sm:text-base text-[var(--steel)] leading-relaxed space-y-3">
+        <p>Bergerak di bidang pengadaan jasa konstruksi, meliputi pembangunan gedung perparkiran/double decker, gedung pasar dan pergudangan, gedung bertingkat, perumahan dan real estate, jalan raya, irigasi, jembatan, dan sektor konstruksi lainnya.</p>
+        <p>RKM siap bekerja sama dengan instansi swasta maupun pemerintah dalam pekerjaan jasa konstruksi dan pengadaan barang dengan penuh tanggung jawab.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="grad-green">
+    <div class="max-w-6xl mx-auto px-5 sm:px-8 py-16 text-center">
+      <h2 class="font-display font-700 text-2xl sm:text-3xl text-white mb-6">Butuh layanan kami untuk proyek Anda?</h2>
+      <a href="#kontak" data-link data-page="kontak" class="btn-lime inline-flex items-center px-8 py-4 text-sm font-semibold tracking-wide font-display">DISKUSIKAN KEBUTUHAN ANDA</a>
+    </div>
+  </div>
+</section>
+
+<!-- ====================================================== -->
+<!-- PAGE: GALERI / DOKUMENTASI -->
+<!-- ====================================================== -->
+<section id="page-galeri" class="page">
+  <div class="grad-green pt-32 sm:pt-40 pb-16 sm:pb-20">
+    <div class="max-w-6xl mx-auto px-5 sm:px-8">
+      <p class="eyebrow text-[var(--lime)] mb-3">Dokumentasi</p>
+      <h1 class="font-display font-800 text-white text-4xl sm:text-5xl leading-tight max-w-2xl">Kegiatan &amp; Momen RKM</h1>
+      <p class="text-white/70 mt-5 max-w-xl text-sm sm:text-base">Dokumentasi pelatihan karyawan, kegiatan operasional, hingga perayaan ulang tahun perusahaan.</p>
+    </div>
+  </div>
+
+  <div class="max-w-6xl mx-auto px-5 sm:px-8 py-16 sm:py-24">
+    <div class="bg-[var(--paper-2)] border border-[var(--line)] px-6 py-4 mb-12 text-sm text-[var(--steel)]">
+      Foto di bawah ini masih berupa placeholder sementara — silakan ganti dengan foto dokumentasi asli (pelatihan karyawan, kegiatan kerja, perayaan ulang tahun perusahaan, dll).
+    </div>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+      <figure class="gallery-placeholder">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#1f8b4c" stroke-width="1.4"><path d="M21 19V5a2 2 0 00-2-2H5a2 2 0 00-2 2v14m18 0H3m18 0l-6-7-4 5-2-3-6 5"/></svg>
+      </figure>
+      <figure class="gallery-placeholder">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#1f8b4c" stroke-width="1.4"><path d="M21 19V5a2 2 0 00-2-2H5a2 2 0 00-2 2v14m18 0H3m18 0l-6-7-4 5-2-3-6 5"/></svg>
+      </figure>
+      <figure class="gallery-placeholder">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#1f8b4c" stroke-width="1.4"><path d="M21 19V5a2 2 0 00-2-2H5a2 2 0 00-2 2v14m18 0H3m18 0l-6-7-4 5-2-3-6 5"/></svg>
+      </figure>
+      <figure class="gallery-placeholder">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#1f8b4c" stroke-width="1.4"><path d="M21 19V5a2 2 0 00-2-2H5a2 2 0 00-2 2v14m18 0H3m18 0l-6-7-4 5-2-3-6 5"/></svg>
+      </figure>
+      <figure class="gallery-placeholder">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#1f8b4c" stroke-width="1.4"><path d="M21 19V5a2 2 0 00-2-2H5a2 2 0 00-2 2v14m18 0H3m18 0l-6-7-4 5-2-3-6 5"/></svg>
+      </figure>
+      <figure class="gallery-placeholder">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#1f8b4c" stroke-width="1.4"><path d="M21 19V5a2 2 0 00-2-2H5a2 2 0 00-2 2v14m18 0H3m18 0l-6-7-4 5-2-3-6 5"/></svg>
+      </figure>
+    </div>
+
+    <div class="grid sm:grid-cols-3 gap-5 mt-5 text-center text-xs text-[var(--steel)]">
+      <p>Pelatihan &amp; pembekalan tenaga keamanan</p>
+      <p>Kegiatan operasional lapangan</p>
+      <p>Perayaan ulang tahun ke-14 perusahaan</p>
+    </div>
+  </div>
+</section>
+
+<!-- ====================================================== -->
+<!-- PAGE: KONTAK -->
+<!-- ====================================================== -->
+<section id="page-kontak" class="page">
+  <div class="grad-green pt-32 sm:pt-40 pb-16 sm:pb-20">
+    <div class="max-w-6xl mx-auto px-5 sm:px-8">
+      <p class="eyebrow text-[var(--lime)] mb-3">Hubungi Kami</p>
+      <h1 class="font-display font-800 text-white text-4xl sm:text-5xl leading-tight max-w-2xl">Diskusikan Kebutuhan Proyek Anda</h1>
+    </div>
+  </div>
+
+  <div class="max-w-6xl mx-auto px-5 sm:px-8 py-16 sm:py-24 grid lg:grid-cols-2 gap-12 lg:gap-16">
+    <div>
+      <p class="text-sm sm:text-base text-[var(--steel)] leading-relaxed mb-9 max-w-md">
+        Tim kami siap membantu kebutuhan pengelolaan parkir, keamanan, kebersihan, maupun proyek konstruksi Anda.
+      </p>
+      <div class="space-y-5 text-sm">
+        <div class="flex items-start gap-4">
+          <span class="w-9 h-9 shrink-0 rounded-full bg-[var(--dark)] flex items-center justify-center text-[var(--lime)]">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 1118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </span>
+          <div>
+            <p class="font-medium text-[var(--ink)]">Alamat Kantor</p>
+            <p class="text-[var(--steel)]">Graha Rapik, De Estrela No. 1, Jl. Raya Pekapuran, Kp. Sindangkarsa, Sukamaju Baru, Tapos, Kota Depok, Jawa Barat 16455</p>
+          </div>
+        </div>
+        <div class="flex items-start gap-4">
+          <span class="w-9 h-9 shrink-0 rounded-full bg-[var(--dark)] flex items-center justify-center text-[var(--lime)]">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.13.96.36 1.9.68 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.91.32 1.85.55 2.81.68A2 2 0 0122 16.92z"/></svg>
+          </span>
+          <div>
+            <p class="font-medium text-[var(--ink)]">Telepon</p>
+            <p class="text-[var(--steel)]">021 8774 0999</p>
+          </div>
+        </div>
+        <div class="flex items-start gap-4">
+          <span class="w-9 h-9 shrink-0 rounded-full bg-[var(--dark)] flex items-center justify-center text-[var(--lime)]">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 4h16v16H4z"/><path d="M4 6l8 7 8-7"/></svg>
+          </span>
+          <div>
+            <p class="font-medium text-[var(--ink)]">Email</p>
+            <p class="text-[var(--steel)]">info@rapik.co.id</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <form id="contactForm" class="bg-white border border-[var(--line)] p-7 sm:p-9">
+      <h3 class="font-display font-600 text-xl mb-2">Kirim Pesan</h3>
+      <p class="text-xs text-[var(--steel)] mb-6">Pesan akan dikirim langsung ke email perusahaan.</p>
+      <div class="space-y-4">
+        <div>
+          <label class="text-xs text-[var(--steel)] uppercase tracking-wide">Nama</label>
+          <input type="text" name="nama" required class="w-full mt-1.5 border border-[var(--line)] px-4 py-3 text-sm focus:outline-none focus:border-[var(--green)]" placeholder="Nama lengkap">
+        </div>
+        <div>
+          <label class="text-xs text-[var(--steel)] uppercase tracking-wide">Email / No. HP</label>
+          <input type="text" name="kontak" required class="w-full mt-1.5 border border-[var(--line)] px-4 py-3 text-sm focus:outline-none focus:border-[var(--green)]" placeholder="Kontak Anda">
+        </div>
+        <div>
+          <label class="text-xs text-[var(--steel)] uppercase tracking-wide">Kebutuhan</label>
+          <textarea name="pesan" rows="4" required class="w-full mt-1.5 border border-[var(--line)] px-4 py-3 text-sm focus:outline-none focus:border-[var(--green)]" placeholder="Ceritakan kebutuhan layanan Anda"></textarea>
+        </div>
+        <button type="submit" id="contactSubmitBtn" class="btn-lime w-full py-3.5 text-sm font-semibold tracking-wide font-display">KIRIM PESAN</button>
+        <p id="contactStatus" class="text-xs mt-1 hidden"></p>
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- ====================================================== -->
+<!-- PAGE: ARTIKEL DETAIL (dirender dinamis via JS) -->
+<!-- ====================================================== -->
+<section id="page-artikel" class="page">
+  <div class="grad-green pt-32 sm:pt-40 pb-14 sm:pb-16">
+    <div class="max-w-3xl mx-auto px-5 sm:px-8">
+      <a href="#home" id="articleBackLink" class="text-[var(--lime)] text-xs tracking-widest uppercase mb-4 inline-block">← Kembali</a>
+      <p id="articleDate" class="eyebrow text-[var(--lime)] mb-3"></p>
+      <h1 id="articleTitle" class="font-display font-800 text-white text-3xl sm:text-4xl leading-tight"></h1>
+    </div>
+  </div>
+  <div class="max-w-3xl mx-auto px-5 sm:px-8 py-16 sm:py-20">
+    <div class="gallery-placeholder mb-10">
+      <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#1f8b4c" stroke-width="1.4"><path d="M21 19V5a2 2 0 00-2-2H5a2 2 0 00-2 2v14m18 0H3m18 0l-6-7-4 5-2-3-6 5"/></svg>
+    </div>
+    <div id="articleBody" class="text-sm sm:text-base text-[var(--steel)] leading-relaxed space-y-4"></div>
+  </div>
+</section>
+
+<!-- ============ FOOTER (shown on all pages) ============ -->
+<footer class="bg-[var(--dark-2)] text-white/55 border-t border-white/10">
+  <div class="max-w-6xl mx-auto px-5 sm:px-8 py-10 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
+    <span class="font-display text-white tracking-tight">PT. RAPIK KARYA MANDIRI — © 2026</span>
+    <span>Parking · Security · Cleaning · Construction Solutions</span>
+  </div>
+  <div class="max-w-6xl mx-auto px-5 sm:px-8 pb-6 text-[10px] text-white/30 space-y-1">
+    <p>Konten berita &amp; artikel pada website ini dapat dikelola dan ditambahkan kapan saja oleh tim RKM melalui Dashboard Admin (CMS), tanpa perlu mengubah kode website.</p>
+    <p>Contoh desain (mockup) dipersiapkan oleh Novatrix Digital — video &amp; foto bersifat sementara (dummy), akan diganti dengan dokumentasi resmi.</p>
+  </div>
+</footer>
+
+<!-- ============ NEWS SIDEBAR TAB ============ -->
+<button id="newsTab" aria-label="Buka berita" class="fixed right-0 top-1/2 -translate-y-1/2 z-40 bg-[var(--dark)] hover:bg-[var(--green)] text-white text-xs font-display tracking-widest px-2.5 py-4 flex flex-col items-center gap-2 rounded-l-lg shadow-lg transition-colors">
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+  <span style="writing-mode: vertical-rl;">BERITA &amp; ARTIKEL</span>
+</button>
+
+<div id="newsOverlay" class="fixed inset-0 bg-black/50 z-40 hidden"></div>
+
+<aside id="newsSidebar" class="fixed top-0 right-0 h-full w-full sm:w-[400px] bg-white z-50 shadow-2xl translate-x-full transition-transform duration-400 ease-out overflow-y-auto">
+  <div class="grad-green px-6 py-6 flex items-center justify-between sticky top-0 z-10">
+    <div>
+      <p class="eyebrow text-[var(--lime)] mb-1">Berita &amp; Artikel</p>
+      <h2 class="font-display font-700 text-white text-lg">Kabar Terbaru RKM</h2>
+    </div>
+    <button id="newsCloseBtn" aria-label="Tutup" class="w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white shrink-0">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </button>
+  </div>
+  <div id="newsList" class="divide-y divide-[var(--line)]"></div>
+</aside>
+
+<!-- ============ DEVELOPER DISCLOSURE MODAL ============ -->
+<div id="devModalOverlay" class="fixed inset-0 bg-black/60 z-[60] hidden items-center justify-center px-5">
+  <div class="bg-white max-w-md w-full p-7 sm:p-9 relative">
+    <button id="devModalClose" aria-label="Tutup" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-[var(--paper-2)] hover:bg-[var(--line)] flex items-center justify-center text-[var(--ink)]">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </button>
+    <p class="eyebrow text-[var(--green)] mb-3">Pemberitahuan</p>
+    <h2 class="font-display font-700 text-xl text-[var(--ink)] mb-4">Sebelum Anda Melanjutkan</h2>
+    <p class="text-sm text-[var(--steel)] leading-relaxed mb-3">
+      Halaman ini merupakan contoh desain (mockup) website yang dibuat oleh saya, Angga dari <strong>Novatrix Digital</strong>, sebagai gambaran apabila PT. Rapik Karya Mandiri berencana mengembangkan website resmi yang baru.
+    </p>
+    <p class="text-sm text-[var(--steel)] leading-relaxed mb-3">
+      Seluruh data, foto, dan video pada halaman ini masih bersifat sementara (dummy) dan belum mewakili kondisi resmi perusahaan.
+    </p>
+    <p class="text-sm text-[var(--steel)] leading-relaxed mb-6">
+      Apabila Anda tertarik untuk mengembangkan website serupa, silakan hubungi saya melalui email <a href="mailto:novatrixdigital@gmail.com" class="text-[var(--green)] underline">novatrixdigital@gmail.com</a>.
+    </p>
+    <button id="devModalContinue" class="btn-lime w-full py-3 text-sm font-semibold tracking-wide font-display">LANJUT KE WEBSITE</button>
+  </div>
+</div>
+
+<script>
+/* ============ DUMMY NEWS / ARTICLES DATA ============ */
+const articles = [
+  {
+    id: 'anniversary-14',
+    date: '12 Februari 2024',
+    title: 'RKM Rayakan Ulang Tahun ke-14, Usung Tema "Membangun Masa Depan"',
+    excerpt: 'Perayaan 14 tahun perjalanan RKM diwarnai syukuran bersama seluruh karyawan dari divisi parkir, keamanan, kebersihan, hingga konstruksi.',
+    body: [
+      'PT. Rapik Karya Mandiri (RKM) merayakan hari jadinya yang ke-14 dengan mengusung tema "Membangun Masa Depan, Mengejar 14 Tahun Berkarya". Acara syukuran dihadiri oleh jajaran manajemen serta perwakilan karyawan dari seluruh divisi.',
+      'Dalam sambutannya, manajemen menyampaikan apresiasi kepada seluruh tim atas dedikasi yang telah membawa RKM berkembang dari penyedia jasa parkir dan keamanan, menjadi perusahaan yang juga aktif di bidang konstruksi sejak 2019.',
+      'Perayaan ini menjadi momentum bagi RKM untuk terus meningkatkan kualitas layanan kepada mitra dan masyarakat di tahun-tahun mendatang.'
+    ]
+  },
+  {
+    id: 'pelatihan-security',
+    date: '03 Januari 2024',
+    title: 'Pembekalan Rutin Tenaga Keamanan RKM Security',
+    excerpt: 'Divisi RKM Security menggelar pelatihan berkala untuk meningkatkan kesiapsiagaan dan standar profesionalisme personel di lapangan.',
+    body: [
+      'Sebagai bagian dari komitmen menjaga kualitas layanan, divisi RKM Security secara rutin mengadakan pelatihan dan pembekalan bagi seluruh tenaga keamanan yang bertugas di berbagai titik kerja sama.',
+      'Materi pelatihan mencakup prosedur pengamanan standar, penanganan situasi darurat, hingga etika pelayanan terhadap pengguna kawasan yang dijaga.',
+      'Pelatihan ini diharapkan dapat terus menjaga kepercayaan klien terhadap layanan keamanan yang disediakan RKM.'
+    ]
+  },
+  {
+    id: 'jumat-bersih',
+    date: '15 Desember 2023',
+    title: 'Kegiatan "Jumat Bersih" Jadi Rutinitas Mingguan RKM',
+    excerpt: 'Seluruh karyawan RKM Parking secara rutin melaksanakan kegiatan bersih-bersih di sekitar area kerja setiap minggunya.',
+    body: [
+      'Kegiatan Jum\'at Bersih yang dilakukan oleh seluruh karyawan RKM Parking di sekitar area kerjanya telah menjadi agenda rutin setiap minggu.',
+      'Kegiatan ini bertujuan untuk menciptakan rasa nyaman dan menjaga kebersihan lingkungan demi kesehatan bersama, baik bagi karyawan maupun masyarakat pengguna kawasan parkir.',
+      'Inisiatif ini sejalan dengan nilai Ketertiban dan Profesionalisme yang dijunjung RKM dalam setiap aspek operasionalnya.'
+    ]
+  },
+  {
+    id: 'ekspansi-konstruksi',
+    date: '20 Oktober 2023',
+    title: 'Mengenal Lini Bisnis Konstruksi RKM Sejak 2019',
+    excerpt: 'Sejak melebarkan sayap ke bidang konstruksi pada 2019, RKM kini turut menangani pembangunan gedung, pasar, hingga infrastruktur jalan.',
+    body: [
+      'Pada tahun 2019, PT. Rapik Karya Mandiri resmi memperluas lini bisnisnya ke bidang pengadaan jasa konstruksi, melengkapi layanan parkir dan keamanan yang telah berjalan sejak 2010.',
+      'Lini konstruksi RKM mencakup pembangunan gedung perparkiran bersusun (double decker), gedung pasar dan pergudangan, gedung bertingkat, perumahan dan real estate, jalan raya, irigasi, hingga jembatan.',
+      'Ekspansi ini menjadi langkah strategis RKM untuk menjadi mitra yang lebih menyeluruh bagi instansi swasta maupun pemerintah dalam pengelolaan dan pembangunan kawasan.'
+    ]
+  }
+];
+
+const newsList = document.getElementById('newsList');
+articles.forEach(a => {
+  const item = document.createElement('a');
+  item.href = '#artikel-' + a.id;
+  item.className = 'block px-6 py-5 hover:bg-[var(--paper-2)] transition-colors cursor-pointer';
+  item.innerHTML = `
+    <p class="text-[10px] text-[var(--green)] uppercase tracking-wide mb-1.5">${a.date}</p>
+    <h3 class="font-display font-600 text-sm text-[var(--ink)] leading-snug mb-1.5">${a.title}</h3>
+    <p class="text-xs text-[var(--steel)] leading-relaxed">${a.excerpt}</p>
+  `;
+  item.addEventListener('click', (e) => {
+    e.preventDefault();
+    openArticle(a.id);
+    closeNewsSidebar();
+  });
+  newsList.appendChild(item);
+});
+
+function openArticle(id){
+  const a = articles.find(x => x.id === id);
+  if(!a) return;
+  document.getElementById('articleDate').textContent = a.date;
+  document.getElementById('articleTitle').textContent = a.title;
+  document.getElementById('articleBody').innerHTML = a.body.map(p => `<p>${p}</p>`).join('');
+  history.pushState(null, '', '#artikel-' + id);
+  showPage('artikel');
+}
+
+/* ============ NEWS SIDEBAR TOGGLE ============ */
+const newsTab = document.getElementById('newsTab');
+const newsSidebar = document.getElementById('newsSidebar');
+const newsOverlay = document.getElementById('newsOverlay');
+const newsCloseBtn = document.getElementById('newsCloseBtn');
+
+function openNewsSidebar(){
+  newsSidebar.classList.remove('translate-x-full');
+  newsOverlay.classList.remove('hidden');
+}
+function closeNewsSidebar(){
+  newsSidebar.classList.add('translate-x-full');
+  newsOverlay.classList.add('hidden');
+}
+newsTab.addEventListener('click', openNewsSidebar);
+newsCloseBtn.addEventListener('click', closeNewsSidebar);
+newsOverlay.addEventListener('click', closeNewsSidebar);
+
+/* ============ DEVELOPER DISCLOSURE MODAL ============ */
+const devModalOverlay = document.getElementById('devModalOverlay');
+function openDevModal(){
+  devModalOverlay.classList.remove('hidden');
+  devModalOverlay.classList.add('flex');
+}
+function closeDevModal(){
+  devModalOverlay.classList.add('hidden');
+  devModalOverlay.classList.remove('flex');
+  sessionStorage.setItem('rkmDevModalSeen', '1');
+}
+document.getElementById('devModalClose').addEventListener('click', closeDevModal);
+document.getElementById('devModalContinue').addEventListener('click', closeDevModal);
+devModalOverlay.addEventListener('click', (e) => { if(e.target === devModalOverlay) closeDevModal(); });
+
+window.addEventListener('load', () => {
+  if(!sessionStorage.getItem('rkmDevModalSeen')){
+    setTimeout(openDevModal, 500);
+  }
+});
+
+/* ============ CONTACT FORM — REAL EMAIL VIA FORMSUBMIT ============ */
+const contactForm = document.getElementById('contactForm');
+if(contactForm){
+  contactForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const btn = document.getElementById('contactSubmitBtn');
+    const status = document.getElementById('contactStatus');
+    const data = new FormData(contactForm);
+    data.append('_subject', 'Pesan baru dari website RKM');
+    data.append('_template', 'table');
+    data.append('_captcha', 'false');
+
+    btn.textContent = 'MENGIRIM...';
+    btn.disabled = true;
+
+    try{
+      const res = await fetch('https://formsubmit.co/ajax/info@rapik.co.id', {
+        method: 'POST',
+        headers: { 'Accept': 'application/json' },
+        body: data
+      });
+      if(res.ok){
+        status.textContent = 'Pesan terkirim. Tim kami akan segera menghubungi Anda.';
+        status.className = 'text-xs mt-1 text-[var(--green)]';
+        contactForm.reset();
+      } else {
+        throw new Error('failed');
+      }
+    } catch(err){
+      status.textContent = 'Pengiriman pertama memerlukan aktivasi email oleh pemilik info@rapik.co.id (cek tautan konfirmasi dari FormSubmit). Setelah diaktifkan, form akan berfungsi otomatis.';
+      status.className = 'text-xs mt-1 text-amber-700';
+    }
+    status.classList.remove('hidden');
+    btn.textContent = 'KIRIM PESAN';
+    btn.disabled = false;
+  });
+}
+
+
+const menuBtn = document.getElementById('menuBtn');
+const mobileMenu = document.getElementById('mobileMenu');
+const menuBars = document.querySelectorAll('.menu-bar');
+let menuOpen = false;
+
+function openMobileMenu(){
+  menuOpen = true;
+  mobileMenu.classList.remove('opacity-0', '-translate-y-2', 'pointer-events-none');
+  mobileMenu.classList.add('opacity-100', 'translate-y-0');
+  menuBtn.setAttribute('aria-expanded', 'true');
+  menuBars[0].style.transform = 'translateY(6.5px) rotate(45deg)';
+  menuBars[1].style.opacity = '0';
+  menuBars[2].style.transform = 'translateY(-6.5px) rotate(-45deg)';
+}
+function closeMobileMenu(){
+  menuOpen = false;
+  mobileMenu.classList.add('opacity-0', '-translate-y-2', 'pointer-events-none');
+  mobileMenu.classList.remove('opacity-100', 'translate-y-0');
+  menuBtn.setAttribute('aria-expanded', 'false');
+  menuBars[0].style.transform = '';
+  menuBars[1].style.opacity = '1';
+  menuBars[2].style.transform = '';
+}
+menuBtn.addEventListener('click', () => { menuOpen ? closeMobileMenu() : openMobileMenu(); });
+
+document.addEventListener('click', (e) => {
+  if(menuOpen && !mobileMenu.contains(e.target) && !menuBtn.contains(e.target)){
+    closeMobileMenu();
+  }
+});
+document.addEventListener('keydown', (e) => { if(e.key === 'Escape' && menuOpen) closeMobileMenu(); });
+
+mobileMenu.querySelectorAll('a').forEach(a => {
+  a.addEventListener('click', () => closeMobileMenu());
+});
+
+/* ============ SPA PAGE ROUTER ============ */
+const pages = document.querySelectorAll('.page');
+const navLinks = document.querySelectorAll('[data-link]');
+
+function showPage(pageId, scroll=true){
+  pages.forEach(p => p.classList.remove('active'));
+  const target = document.getElementById('page-' + pageId);
+  if(target){ target.classList.add('active'); }
+
+  navLinks.forEach(l => l.classList.remove('active'));
+  document.querySelectorAll('[data-page="' + pageId + '"]').forEach(l => l.classList.add('active'));
+
+  if(scroll){ window.scrollTo({ top: 0, behavior: 'instant' in window ? 'instant' : 'auto' }); }
+
+  // play/pause hero video only when home page is visible
+  const vid = document.getElementById('heroVideo');
+  if(vid){
+    if(pageId === 'home'){ vid.play().catch(()=>{}); }
+  }
+
+  animatePageIn(target);
+}
+
+function animatePageIn(target){
+  if(!target) return;
+  gsap.fromTo(target, { opacity: 0 }, { opacity: 1, duration: 0.45, ease: 'power2.out' });
+}
+
+navLinks.forEach(link => {
+  link.addEventListener('click', (e) => {
+    e.preventDefault();
+    const pageId = link.getAttribute('data-page');
+    history.pushState(null, '', '#' + pageId);
+    showPage(pageId);
+    closeMobileMenu();
+  });
+});
+
+function resolveHashToPage(hash){
+  if(hash.startsWith('artikel-')){
+    const id = hash.replace('artikel-','');
+    const a = articles.find(x => x.id === id);
+    if(a){
+      document.getElementById('articleDate').textContent = a.date;
+      document.getElementById('articleTitle').textContent = a.title;
+      document.getElementById('articleBody').innerHTML = a.body.map(p => `<p>${p}</p>`).join('');
+      return 'artikel';
+    }
+    return 'home';
+  }
+  return hash || 'home';
+}
+
+window.addEventListener('popstate', () => {
+  const hash = window.location.hash.replace('#','');
+  showPage(resolveHashToPage(hash), false);
+});
+
+/* init from URL hash on load */
+window.addEventListener('DOMContentLoaded', () => {
+  const hash = window.location.hash.replace('#','');
+  showPage(resolveHashToPage(hash), false);
+});
+
+document.getElementById('articleBackLink').addEventListener('click', (e) => {
+  e.preventDefault();
+  history.pushState(null, '', '#home');
+  showPage('home');
+});
+
+/* ============ HERO INTRO ANIMATION ============ */
+window.addEventListener('load', () => {
+  gsap.to('.hero-fade', { opacity: 1, y: 0, duration: 0.9, stagger: 0.15, ease: 'power3.out' });
+});
+gsap.set('.hero-fade', { y: 22 });
+</script>
+
+</body>
+</html>
