@@ -102,6 +102,176 @@
   @media (prefers-reduced-motion: reduce){
     *{ animation-duration:0.001ms !important; transition-duration:0.001ms !important; }
   }
+
+  /* ============ CUSTOM ORG TREE STRUCTURE ============ */
+  .tree-container {
+    width: 100%;
+    overflow-x: auto;
+    padding: 10px 0;
+  }
+  .tree-wrapper {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+  .tree-branch {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+  }
+  .tree-node {
+    position: relative;
+    z-index: 10;
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  
+  /* Desktop Tree Styles */
+  @media (min-width: 768px) {
+    .tree-children {
+      display: flex;
+      justify-content: center;
+      position: relative;
+      padding-top: 32px;
+      margin-top: 32px;
+    }
+    
+    /* Line coming down from parent to the horizontal branch line */
+    .tree-children::before {
+      content: '';
+      position: absolute;
+      top: -32px;
+      left: 50%;
+      width: 2px;
+      height: 32px;
+      background: var(--green);
+      transform: translateX(-50%);
+      opacity: 0;
+      transition: opacity 0.8s ease;
+    }
+    
+    .tree-node-wrapper {
+      position: relative;
+      padding: 32px 16px 0 16px;
+    }
+    
+    /* Horizontal connector lines */
+    .tree-node-wrapper::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: var(--line);
+      opacity: 0;
+      transition: opacity 0.8s ease;
+    }
+    
+    /* Vertical line down to the child node */
+    .tree-node-wrapper::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: 2px;
+      height: 32px;
+      background: var(--line);
+      transform: translateX(-50%);
+      opacity: 0;
+      transition: opacity 0.8s ease;
+    }
+    
+    /* Hide outer horizontal branches */
+    .tree-node-wrapper:first-child::before {
+      left: 50%;
+    }
+    .tree-node-wrapper:last-child::before {
+      right: 50%;
+    }
+    .tree-node-wrapper:only-child::before {
+      display: none;
+    }
+    
+    /* Show line class when visible */
+    .tree-container.animated .tree-children::before,
+    .tree-container.animated .tree-node-wrapper::before,
+    .tree-container.animated .tree-node-wrapper::after {
+      opacity: 1;
+    }
+  }
+
+  /* Mobile Tree Styles */
+  @media (max-width: 767px) {
+    .tree-wrapper {
+      justify-content: flex-start;
+      padding: 10px;
+    }
+    .tree-branch {
+      align-items: flex-start;
+      width: 100%;
+    }
+    .tree-children {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      padding-left: 20px;
+      margin-left: 24px;
+      position: relative;
+      margin-top: 16px;
+      width: calc(100% - 24px);
+    }
+    
+    /* Vertical line on the left side of children */
+    .tree-children::before {
+      content: '';
+      position: absolute;
+      top: -16px;
+      bottom: 28px;
+      left: 0;
+      width: 2px;
+      background: var(--line);
+      opacity: 0;
+      transition: opacity 0.8s ease;
+    }
+    
+    .tree-node-wrapper {
+      position: relative;
+      width: 100%;
+    }
+    
+    /* Horizontal line connector to each child card */
+    .tree-node-wrapper::before {
+      content: '';
+      position: absolute;
+      top: 28px;
+      left: -20px;
+      width: 20px;
+      height: 2px;
+      background: var(--line);
+      opacity: 0;
+      transition: opacity 0.8s ease;
+    }
+    
+    .tree-container.animated .tree-children::before,
+    .tree-container.animated .tree-node-wrapper::before {
+      opacity: 1;
+    }
+  }
+  
+  /* Scroll Reveal & Details Styles */
+  .scroll-reveal {
+    opacity: 0;
+    transform: translateY(35px);
+  }
+  
+  /* Active node styling */
+  .tree-node-card.active-node {
+    border-color: var(--green) !important;
+    background: var(--paper-2) !important;
+    box-shadow: 0 10px 25px -10px rgba(15, 61, 39, 0.2) !important;
+  }
 </style>
 </head>
 <body class="antialiased">
@@ -191,11 +361,11 @@
 
   <!-- INTRO SPLIT -->
   <div class="max-w-6xl mx-auto px-5 sm:px-8 py-20 sm:py-28 grid md:grid-cols-12 gap-10">
-    <div class="md:col-span-4">
+    <div class="md:col-span-4 scroll-reveal">
       <p class="eyebrow text-[var(--green)] mb-3">Siapa Kami</p>
       <h2 class="font-display font-700 text-3xl sm:text-4xl leading-tight">Berakar dari Parkir &amp; Keamanan, Tumbuh ke Konstruksi.</h2>
     </div>
-    <div class="md:col-span-7 md:col-start-6 text-[var(--steel)] text-sm sm:text-base leading-relaxed space-y-5">
+    <div class="md:col-span-7 md:col-start-6 text-[var(--steel)] text-sm sm:text-base leading-relaxed space-y-5 scroll-reveal">
       <p>Berdiri sejak 2010 di Kota Depok, PT. Rapik Karya Mandiri mengawali bisnis di bidang pengelolaan sistem perparkiran dan penyediaan jasa keamanan (security service), sebelum memperluas lini usaha ke jasa konstruksi pada 2019.</p>
       <p>Kini, dengan lebih dari 200 tenaga profesional, kami melayani gedung perparkiran, pasar tradisional, kawasan komersial, hingga proyek pembangunan infrastruktur — selalu berlandaskan integritas dan profesionalisme.</p>
       <a href="#tentang" data-link data-page="tentang" class="underline-link inline-flex items-center gap-2 text-[var(--ink)] font-medium pb-0.5">Baca selengkapnya tentang kami →</a>
@@ -208,28 +378,28 @@
       <p class="eyebrow text-[var(--green)] mb-3">Layanan Kami</p>
       <h2 class="font-display font-700 text-3xl sm:text-4xl leading-tight mb-12 max-w-lg">Empat Lini Layanan Terintegrasi</h2>
       <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-        <div class="card p-6">
+        <div class="card p-6 scroll-reveal">
           <div class="w-11 h-11 rounded-full bg-[var(--dark)] flex items-center justify-center mb-6 text-[var(--lime)]">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="4" width="18" height="16" rx="1"/><path d="M8 4v16M3 9h5M8 14h6a2 2 0 1 0 0-4H8"/></svg>
           </div>
           <h3 class="font-display font-600 text-base mb-2">RKM Parking</h3>
           <p class="text-xs text-[var(--steel)] leading-relaxed">Pengelolaan parkir on-street &amp; off-street dengan sistem kontrol digital.</p>
         </div>
-        <div class="card p-6">
+        <div class="card p-6 scroll-reveal">
           <div class="w-11 h-11 rounded-full bg-[var(--dark)] flex items-center justify-center mb-6 text-[var(--lime)]">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3z"/></svg>
           </div>
           <h3 class="font-display font-600 text-base mb-2">RKM Security</h3>
           <p class="text-xs text-[var(--steel)] leading-relaxed">Tenaga keamanan terlatih untuk kawasan korporat dan publik.</p>
         </div>
-        <div class="card p-6">
+        <div class="card p-6 scroll-reveal">
           <div class="w-11 h-11 rounded-full bg-[var(--dark)] flex items-center justify-center mb-6 text-[var(--lime)]">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 19h14M7 19V9l5-4 5 4v10M10 19v-5h4v5"/></svg>
           </div>
           <h3 class="font-display font-600 text-base mb-2">RKM MCK</h3>
           <p class="text-xs text-[var(--steel)] leading-relaxed">Layanan kebersihan menyeluruh untuk gedung dan fasilitas publik.</p>
         </div>
-        <div class="card p-6">
+        <div class="card p-6 scroll-reveal">
           <div class="w-11 h-11 rounded-full bg-[var(--dark)] flex items-center justify-center mb-6 text-[var(--lime)]">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-6h6v6"/></svg>
           </div>
@@ -243,7 +413,7 @@
 
   <!-- DOCUMENTATION PREVIEW -->
   <div class="max-w-6xl mx-auto px-5 sm:px-8 py-20 sm:py-24">
-    <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
+    <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10 scroll-reveal">
       <div>
         <p class="eyebrow text-[var(--green)] mb-3">Sekilas Dokumentasi</p>
         <h2 class="font-display font-700 text-3xl sm:text-4xl leading-tight">Momen Kegiatan RKM</h2>
@@ -251,13 +421,13 @@
       <a href="#galeri" data-link data-page="galeri" class="underline-link inline-flex items-center gap-2 text-[var(--ink)] font-medium pb-0.5 shrink-0">Lihat semua dokumentasi →</a>
     </div>
     <div class="grid sm:grid-cols-3 gap-5">
-      <figure class="gallery-placeholder">
+      <figure class="gallery-placeholder scroll-reveal">
         <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#1f8b4c" stroke-width="1.4"><path d="M21 19V5a2 2 0 00-2-2H5a2 2 0 00-2 2v14m18 0H3m18 0l-6-7-4 5-2-3-6 5"/></svg>
       </figure>
-      <figure class="gallery-placeholder">
+      <figure class="gallery-placeholder scroll-reveal">
         <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#1f8b4c" stroke-width="1.4"><path d="M21 19V5a2 2 0 00-2-2H5a2 2 0 00-2 2v14m18 0H3m18 0l-6-7-4 5-2-3-6 5"/></svg>
       </figure>
-      <figure class="gallery-placeholder">
+      <figure class="gallery-placeholder scroll-reveal">
         <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#1f8b4c" stroke-width="1.4"><path d="M21 19V5a2 2 0 00-2-2H5a2 2 0 00-2 2v14m18 0H3m18 0l-6-7-4 5-2-3-6 5"/></svg>
       </figure>
     </div>
@@ -265,7 +435,7 @@
 
   <!-- CTA -->
   <div class="grad-green">
-    <div class="max-w-6xl mx-auto px-5 sm:px-8 py-20 text-center">
+    <div class="max-w-6xl mx-auto px-5 sm:px-8 py-20 text-center scroll-reveal">
       <h2 class="font-display font-800 text-3xl sm:text-5xl text-white leading-tight mb-6">Siap Bekerja Sama dengan Kami?</h2>
       <p class="text-white/70 max-w-md mx-auto mb-9 text-sm sm:text-base">Diskusikan kebutuhan pengelolaan kawasan atau proyek konstruksi Anda bersama tim kami.</p>
       <a href="#kontak" data-link data-page="kontak" class="btn-lime inline-flex items-center px-8 py-4 text-sm font-semibold tracking-wide font-display">HUBUNGI KAMI SEKARANG</a>
@@ -315,6 +485,172 @@
         <div class="h-px bg-white/15 mb-6"></div>
         <p class="text-xs text-white/55 leading-relaxed">Struktur legal perusahaan didampingi oleh notaris terdaftar sesuai akta pendirian dan perubahan badan usaha.</p>
       </div>
+    </div>
+  </div>
+
+  <!-- STRUKTUR ORGANISASI -->
+  <div class="border-t border-[var(--line)] bg-[var(--paper)] py-20 sm:py-24" id="org-structure-section">
+    <div class="max-w-6xl mx-auto px-5 sm:px-8">
+      <div class="text-center mb-16 scroll-reveal">
+        <p class="eyebrow text-[var(--green)] mb-3">Manajemen Perusahaan</p>
+        <h2 class="font-display font-700 text-3xl sm:text-4xl leading-tight">Struktur Organisasi PT. RKM</h2>
+        <p class="text-sm text-[var(--steel)] mt-4 max-w-lg mx-auto">
+          Sinergi kepemimpinan profesional yang berdedikasi tinggi untuk menghadirkan layanan terbaik perparkiran, keamanan, kebersihan, dan konstruksi.
+        </p>
+      </div>
+
+      <!-- Tree Structure Container -->
+      <div class="tree-container select-none mb-12 scroll-reveal" id="tree-container-elm">
+        <div class="tree-wrapper">
+          
+          <!-- Root Branch (CEO) -->
+          <div class="tree-branch">
+            <div class="tree-node" data-id="ceo">
+              <div class="tree-node-card active-node bg-white border border-[var(--line)] p-4 rounded-xl shadow-sm flex items-center gap-4 hover:border-[var(--green)] hover:shadow-md transition-all cursor-pointer w-64 md:w-72">
+                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=200&h=200" alt="Irfan Januar" class="w-12 h-12 md:w-14 md:h-14 rounded-full object-cover border-2 border-[var(--lime)] shadow-sm shrink-0">
+                <div class="min-w-0">
+                  <h3 class="font-display font-600 text-sm md:text-base text-[var(--ink)] truncate">Irfan Januar</h3>
+                  <p class="text-[10px] md:text-xs font-semibold text-[var(--green)] uppercase tracking-wider mt-0.5">Direktur Utama</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Level 2: Directors -->
+            <div class="tree-children">
+              
+              <!-- COO Branch -->
+              <div class="tree-node-wrapper">
+                <div class="tree-branch">
+                  <div class="tree-node" data-id="coo">
+                    <div class="tree-node-card bg-white border border-[var(--line)] p-4 rounded-xl shadow-sm flex items-center gap-4 hover:border-[var(--green)] hover:shadow-md transition-all cursor-pointer w-64 md:w-72">
+                      <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=200&h=200" alt="H. M. Yusuf" class="w-12 h-12 md:w-14 md:h-14 rounded-full object-cover border-2 border-[var(--lime-soft)] shadow-sm shrink-0">
+                      <div class="min-w-0">
+                        <h3 class="font-display font-600 text-sm md:text-base text-[var(--ink)] truncate">H. M. Yusuf</h3>
+                        <p class="text-[10px] md:text-xs font-semibold text-[var(--green)] uppercase tracking-wider mt-0.5">Direktur Operasional</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Level 3: Div Heads (Under COO) -->
+                  <div class="tree-children">
+                    
+                    <!-- Div Head 1: Parking -->
+                    <div class="tree-node-wrapper">
+                      <div class="tree-branch">
+                        <div class="tree-node" data-id="div-parking">
+                          <div class="tree-node-card bg-white border border-[var(--line)] p-4 rounded-xl shadow-sm flex items-center gap-4 hover:border-[var(--green)] hover:shadow-md transition-all cursor-pointer w-64 md:w-72">
+                            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=200&h=200" alt="Dedi Kurnia" class="w-12 h-12 md:w-14 md:h-14 rounded-full object-cover border-2 border-[var(--line)] shadow-sm shrink-0">
+                            <div class="min-w-0">
+                              <h3 class="font-display font-600 text-sm md:text-base text-[var(--ink)] truncate">Dedi Kurnia</h3>
+                              <p class="text-[10px] md:text-xs font-semibold text-[var(--green)] uppercase tracking-wider mt-0.5">Kabid. RKM Parking</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Div Head 2: Security -->
+                    <div class="tree-node-wrapper">
+                      <div class="tree-branch">
+                        <div class="tree-node" data-id="div-security">
+                          <div class="tree-node-card bg-white border border-[var(--line)] p-4 rounded-xl shadow-sm flex items-center gap-4 hover:border-[var(--green)] hover:shadow-md transition-all cursor-pointer w-64 md:w-72">
+                            <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80&w=200&h=200" alt="Letkol (Purn) Wawan S." class="w-12 h-12 md:w-14 md:h-14 rounded-full object-cover border-2 border-[var(--line)] shadow-sm shrink-0">
+                            <div class="min-w-0">
+                              <h3 class="font-display font-600 text-sm md:text-base text-[var(--ink)] truncate">Letkol (Purn) Wawan S.</h3>
+                              <p class="text-[10px] md:text-xs font-semibold text-[var(--green)] uppercase tracking-wider mt-0.5">Kabid. RKM Security</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Div Head 3: Cleaning -->
+                    <div class="tree-node-wrapper">
+                      <div class="tree-branch">
+                        <div class="tree-node" data-id="div-cleaning">
+                          <div class="tree-node-card bg-white border border-[var(--line)] p-4 rounded-xl shadow-sm flex items-center gap-4 hover:border-[var(--green)] hover:shadow-md transition-all cursor-pointer w-64 md:w-72">
+                            <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&q=80&w=200&h=200" alt="Siti Aminah" class="w-12 h-12 md:w-14 md:h-14 rounded-full object-cover border-2 border-[var(--line)] shadow-sm shrink-0">
+                            <div class="min-w-0">
+                              <h3 class="font-display font-600 text-sm md:text-base text-[var(--ink)] truncate">Siti Aminah</h3>
+                              <p class="text-[10px] md:text-xs font-semibold text-[var(--green)] uppercase tracking-wider mt-0.5">Kabid. RKM MCK</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Div Head 4: Construction -->
+                    <div class="tree-node-wrapper">
+                      <div class="tree-branch">
+                        <div class="tree-node" data-id="div-construction">
+                          <div class="tree-node-card bg-white border border-[var(--line)] p-4 rounded-xl shadow-sm flex items-center gap-4 hover:border-[var(--green)] hover:shadow-md transition-all cursor-pointer w-64 md:w-72">
+                            <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=200&h=200" alt="Ir. Bambang Triyono" class="w-12 h-12 md:w-14 md:h-14 rounded-full object-cover border-2 border-[var(--line)] shadow-sm shrink-0">
+                            <div class="min-w-0">
+                              <h3 class="font-display font-600 text-sm md:text-base text-[var(--ink)] truncate">Ir. Bambang Triyono</h3>
+                              <p class="text-[10px] md:text-xs font-semibold text-[var(--green)] uppercase tracking-wider mt-0.5">Kabid. RKM Konstruksi</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+
+              <!-- CFO Branch (Direct under CEO, no children) -->
+              <div class="tree-node-wrapper">
+                <div class="tree-branch">
+                  <div class="tree-node" data-id="cfo">
+                    <div class="tree-node-card bg-white border border-[var(--line)] p-4 rounded-xl shadow-sm flex items-center gap-4 hover:border-[var(--green)] hover:shadow-md transition-all cursor-pointer w-64 md:w-72">
+                      <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=200&h=200" alt="Rina Herawati" class="w-12 h-12 md:w-14 md:h-14 rounded-full object-cover border-2 border-[var(--lime-soft)] shadow-sm shrink-0">
+                      <div class="min-w-0">
+                        <h3 class="font-display font-600 text-sm md:text-base text-[var(--ink)] truncate">Rina Herawati</h3>
+                        <p class="text-[10px] md:text-xs font-semibold text-[var(--green)] uppercase tracking-wider mt-0.5">Direktur Keuangan</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Interactive Detail Panel -->
+      <div class="max-w-2xl mx-auto scroll-reveal">
+        <div id="org-detail-card" class="bg-white border border-[var(--line)] rounded-2xl p-6 sm:p-8 shadow-sm transition-all duration-300">
+          <div class="flex flex-col sm:flex-row items-center sm:items-start gap-6">
+            <img id="detail-img" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=200&h=200" alt="Irfan Januar" class="w-24 h-24 sm:w-28 sm:h-28 rounded-xl object-cover border border-[var(--line)] shadow-inner">
+            <div class="w-full text-center sm:text-left">
+              <span id="detail-tag" class="inline-block text-[10px] font-semibold text-[var(--green)] bg-[var(--paper-2)] px-2.5 py-1 rounded-full uppercase tracking-wider mb-2">Pimpinan Tertinggi</span>
+              <h3 id="detail-name" class="font-display font-700 text-xl sm:text-2xl text-[var(--ink)]">Irfan Januar</h3>
+              <p id="detail-role" class="text-sm text-[var(--steel)] font-medium mt-1">Direktur Utama (CEO)</p>
+              
+              <div class="h-px bg-[var(--line)] my-4"></div>
+              
+              <h4 class="text-xs font-semibold uppercase tracking-wider text-[var(--ink)] mb-2.5">Peran &amp; Tanggung Jawab:</h4>
+              <ul id="detail-list" class="text-sm text-[var(--steel)] space-y-2 text-left list-none">
+                <li class="flex items-start gap-2.5">
+                  <span class="text-[var(--green)] shrink-0 mt-0.5">✓</span>
+                  <span>Memimpin arah strategis dan visi jangka panjang PT. Rapik Karya Mandiri.</span>
+                </li>
+                <li class="flex items-start gap-2.5">
+                  <span class="text-[var(--green)] shrink-0 mt-0.5">✓</span>
+                  <span>Mengawasi seluruh divisi operasional (Parking, Security, Cleaning, Konstruksi).</span>
+                </li>
+                <li class="flex items-start gap-2.5">
+                  <span class="text-[var(--green)] shrink-0 mt-0.5">✓</span>
+                  <span>Menjalin hubungan kemitraan strategis tingkat tinggi dengan pihak eksternal.</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      
     </div>
   </div>
 
@@ -375,7 +711,7 @@
 
   <div class="max-w-6xl mx-auto px-5 sm:px-8 py-16 sm:py-24 space-y-16">
 
-    <div class="grid md:grid-cols-12 gap-8 items-start border-t border-[var(--line)] pt-12">
+    <div class="grid md:grid-cols-12 gap-8 items-start border-t border-[var(--line)] pt-12 scroll-reveal">
       <div class="md:col-span-4">
         <span class="font-display text-xs text-[var(--green)] tracking-widest">01 / PARKING</span>
         <h2 class="font-display font-700 text-2xl sm:text-3xl mt-3">RKM Parking</h2>
@@ -386,7 +722,7 @@
       </div>
     </div>
 
-    <div class="grid md:grid-cols-12 gap-8 items-start border-t border-[var(--line)] pt-12">
+    <div class="grid md:grid-cols-12 gap-8 items-start border-t border-[var(--line)] pt-12 scroll-reveal">
       <div class="md:col-span-4">
         <span class="font-display text-xs text-[var(--green)] tracking-widest">02 / SECURITY</span>
         <h2 class="font-display font-700 text-2xl sm:text-3xl mt-3">RKM Security</h2>
@@ -397,7 +733,7 @@
       </div>
     </div>
 
-    <div class="grid md:grid-cols-12 gap-8 items-start border-t border-[var(--line)] pt-12">
+    <div class="grid md:grid-cols-12 gap-8 items-start border-t border-[var(--line)] pt-12 scroll-reveal">
       <div class="md:col-span-4">
         <span class="font-display text-xs text-[var(--green)] tracking-widest">03 / CLEANING</span>
         <h2 class="font-display font-700 text-2xl sm:text-3xl mt-3">RKM MCK</h2>
@@ -408,7 +744,7 @@
       </div>
     </div>
 
-    <div class="grid md:grid-cols-12 gap-8 items-start border-t border-[var(--line)] pt-12">
+    <div class="grid md:grid-cols-12 gap-8 items-start border-t border-[var(--line)] pt-12 scroll-reveal">
       <div class="md:col-span-4">
         <span class="font-display text-xs text-[var(--green)] tracking-widest">04 / KONSTRUKSI</span>
         <h2 class="font-display font-700 text-2xl sm:text-3xl mt-3">RKM Konstruksi</h2>
@@ -447,22 +783,22 @@
     </div>
 
     <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-      <figure class="gallery-placeholder">
+      <figure class="gallery-placeholder scroll-reveal">
         <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#1f8b4c" stroke-width="1.4"><path d="M21 19V5a2 2 0 00-2-2H5a2 2 0 00-2 2v14m18 0H3m18 0l-6-7-4 5-2-3-6 5"/></svg>
       </figure>
-      <figure class="gallery-placeholder">
+      <figure class="gallery-placeholder scroll-reveal">
         <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#1f8b4c" stroke-width="1.4"><path d="M21 19V5a2 2 0 00-2-2H5a2 2 0 00-2 2v14m18 0H3m18 0l-6-7-4 5-2-3-6 5"/></svg>
       </figure>
-      <figure class="gallery-placeholder">
+      <figure class="gallery-placeholder scroll-reveal">
         <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#1f8b4c" stroke-width="1.4"><path d="M21 19V5a2 2 0 00-2-2H5a2 2 0 00-2 2v14m18 0H3m18 0l-6-7-4 5-2-3-6 5"/></svg>
       </figure>
-      <figure class="gallery-placeholder">
+      <figure class="gallery-placeholder scroll-reveal">
         <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#1f8b4c" stroke-width="1.4"><path d="M21 19V5a2 2 0 00-2-2H5a2 2 0 00-2 2v14m18 0H3m18 0l-6-7-4 5-2-3-6 5"/></svg>
       </figure>
-      <figure class="gallery-placeholder">
+      <figure class="gallery-placeholder scroll-reveal">
         <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#1f8b4c" stroke-width="1.4"><path d="M21 19V5a2 2 0 00-2-2H5a2 2 0 00-2 2v14m18 0H3m18 0l-6-7-4 5-2-3-6 5"/></svg>
       </figure>
-      <figure class="gallery-placeholder">
+      <figure class="gallery-placeholder scroll-reveal">
         <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#1f8b4c" stroke-width="1.4"><path d="M21 19V5a2 2 0 00-2-2H5a2 2 0 00-2 2v14m18 0H3m18 0l-6-7-4 5-2-3-6 5"/></svg>
       </figure>
     </div>
@@ -519,6 +855,13 @@
             <p class="text-[var(--steel)]">info@rapik.co.id</p>
           </div>
         </div>
+      </div>
+
+      <!-- Google Maps Embed Container -->
+      <div class="mt-8 rounded-xl overflow-hidden border border-[var(--line)] shadow-sm h-64 sm:h-80 relative group scroll-reveal">
+        <iframe src="https://maps.google.com/maps?q=Graha%20Rapik%2c%20De%20Estrela%20No.%201%2c%20Jl.%20Raya%20Pekapuran%2c%20Tapos%2c%20Kota%20Depok&t=&z=15&ie=UTF8&iwloc=&output=embed" 
+                width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+                class="grayscale hover:grayscale-0 transition-all duration-500"></iframe>
       </div>
     </div>
 
@@ -834,7 +1177,7 @@ function showPage(pageId, scroll=true){
 
 function animatePageIn(target){
   if(!target) return;
-  gsap.fromTo(target, { opacity: 0 }, { opacity: 1, duration: 0.45, ease: 'power2.out' });
+  gsap.fromTo(target, { opacity: 0, y: 15 }, { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' });
 }
 
 navLinks.forEach(link => {
@@ -884,7 +1227,176 @@ window.addEventListener('load', () => {
   gsap.to('.hero-fade', { opacity: 1, y: 0, duration: 0.9, stagger: 0.15, ease: 'power3.out' });
 });
 gsap.set('.hero-fade', { y: 22 });
+
+/* ============ ORGANIZATIONAL TREE INTERACTIVITY ============ */
+const orgData = {
+  'ceo': {
+    name: 'Irfan Januar',
+    role: 'Direktur Utama (CEO)',
+    tag: 'Pimpinan Tertinggi',
+    img: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=200&h=200',
+    tasks: [
+      'Memimpin arah strategis dan visi jangka panjang PT. Rapik Karya Mandiri.',
+      'Mengawasi seluruh divisi operasional (Parking, Security, Cleaning, Konstruksi).',
+      'Menjalin hubungan kemitraan strategis tingkat tinggi dengan pihak eksternal.'
+    ]
+  },
+  'coo': {
+    name: 'H. M. Yusuf',
+    role: 'Direktur Operasional (COO)',
+    tag: 'Direksi Utama',
+    img: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=200&h=200',
+    tasks: [
+      'Mengatur efisiensi operasional harian seluruh divisi pelayanan di lapangan.',
+      'Mengawasi implementasi standar mutu (SOP) dan kinerja SDM operasional.',
+      'Mengelola koordinasi taktis dan mitigasi risiko operasional proyek.'
+    ]
+  },
+  'cfo': {
+    name: 'Rina Herawati',
+    role: 'Direktur Keuangan (CFO)',
+    tag: 'Direksi Utama',
+    img: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=200&h=200',
+    tasks: [
+      'Mengelola perencanaan anggaran, laporan keuangan, dan akuntansi perusahaan.',
+      'Memastikan kepatuhan pajak korporat dan pelaksanaan audit internal.',
+      'Menganalisis kelayakan finansial investasi baru dan proyek konstruksi RKM.'
+    ]
+  },
+  'div-parking': {
+    name: 'Dedi Kurnia',
+    role: 'Kepala Bidang RKM Parking',
+    tag: 'Kepala Divisi',
+    img: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=200&h=200',
+    tasks: [
+      'Mengawasi operasional sistem perparkiran digital terintegrasi di semua area.',
+      'Menganalisis performa pendapatan parkir mitra secara real-time.',
+      'Mengoordinasikan pelatihan juru parkir terkait layanan prima dan ketertiban.'
+    ]
+  },
+  'div-security': {
+    name: 'Letkol (Purn) Wawan S.',
+    role: 'Kepala Bidang RKM Security',
+    tag: 'Kepala Divisi',
+    img: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80&w=200&h=200',
+    tasks: [
+      'Menyusun skenario dan strategi keamanan kawasan komersial & publik.',
+      'Memimpin pelatihan berkala kesiapsiagaan dan mentalitas satuan pengamanan.',
+      'Menjalin koordinasi pengamanan eksternal dengan TNI, POLRI, dan tokoh masyarakat.'
+    ]
+  },
+  'div-cleaning': {
+    name: 'Siti Aminah',
+    role: 'Kepala Bidang RKM MCK / Cleaning',
+    tag: 'Kepala Divisi',
+    img: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&q=80&w=200&h=200',
+    tasks: [
+      'Mengendalikan jadwal kebersihan rutin, Jumat Bersih, dan higienitas area kerja.',
+      'Mengawasi rantai pasokan bahan kimia sanitasi ramah lingkungan (green cleaning).',
+      'Memastikan kontrol kualitas kebersihan fasilitas publik milik mitra RKM.'
+    ]
+  },
+  'div-construction': {
+    name: 'Ir. Bambang Triyono',
+    role: 'Kepala Bidang RKM Konstruksi',
+    tag: 'Kepala Divisi',
+    img: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=200&h=200',
+    tasks: [
+      'Mengelola perencanaan teknis (gambar kerja) dan perhitungan Rencana Anggaran Biaya (RAB).',
+      'Memimpin jalannya konstruksi fisik di lapangan mulai dari persiapan hingga serah terima.',
+      'Menjamin kualitas material beton/baja serta mengawasi program K3 (Keselamatan Kerja).'
+    ]
+  }
+};
+
+const detailCard = document.getElementById('org-detail-card');
+const nodes = document.querySelectorAll('.tree-node');
+
+nodes.forEach(node => {
+  node.addEventListener('click', () => {
+    const id = node.getAttribute('data-id');
+    const data = orgData[id];
+    if(!data) return;
+    
+    // Hapus kelas aktif dari semua card
+    document.querySelectorAll('.tree-node-card').forEach(card => card.classList.remove('active-node'));
+    // Tambahkan kelas aktif pada card yang diklik
+    node.querySelector('.tree-node-card').classList.add('active-node');
+    
+    // Animasi transisi detail card
+    gsap.to(detailCard, {
+      opacity: 0,
+      y: 10,
+      scale: 0.98,
+      duration: 0.2,
+      ease: 'power2.in',
+      onComplete: () => {
+        document.getElementById('detail-img').src = data.img;
+        document.getElementById('detail-img').alt = data.name;
+        document.getElementById('detail-tag').textContent = data.tag;
+        document.getElementById('detail-name').textContent = data.name;
+        document.getElementById('detail-role').textContent = data.role;
+        document.getElementById('detail-list').innerHTML = data.tasks.map(t => `
+          <li class="flex items-start gap-2.5">
+            <span class="text-[var(--green)] shrink-0 mt-0.5">✓</span>
+            <span>${t}</span>
+          </li>
+        `).join('');
+        
+        gsap.to(detailCard, {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 0.3,
+          ease: 'power2.out'
+        });
+      }
+    });
+  });
+});
+
+/* ============ SCROLL REVEAL & TREE TRANSITION OBSERVATION ============ */
+const scrollObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting) {
+      gsap.to(entry.target, { opacity: 1, y: 0, duration: 0.75, ease: 'power2.out' });
+      scrollObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.08 });
+
+const treeObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting) {
+      const container = document.getElementById('tree-container-elm');
+      if(container) container.classList.add('animated');
+      
+      gsap.to('.tree-node', {
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        duration: 0.65,
+        stagger: 0.12,
+        ease: 'back.out(1.15)'
+      });
+      treeObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.12 });
+
+window.addEventListener('load', () => {
+  // Hubungkan semua elemen dengan kelas scroll-reveal ke observer
+  document.querySelectorAll('.scroll-reveal').forEach(el => {
+    gsap.set(el, { opacity: 0, y: 35 });
+    scrollObserver.observe(el);
+  });
+
+  // Hubungkan section pohon organisasi
+  const treeSec = document.getElementById('org-structure-section');
+  if(treeSec) treeObserver.observe(treeSec);
+});
 </script>
+
 
 </body>
 </html>
